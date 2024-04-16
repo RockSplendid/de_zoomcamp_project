@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    database: learned-maker-413410
+    schema: covid_db
+
+    tables:
+      - name: test_results
