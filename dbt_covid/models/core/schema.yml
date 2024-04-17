@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: core
+    database: learned-maker-413410
+    schema: covid_db
+    
+    tables:
+      - name: states
+
+
+models:
+  - name: dim_state
+    description: >
+      Basic information about all states, including notes about our methodology and the websites we use to check for data.
+
+
+  - name: fact_test_result
+    description: >
+      All COVID data for a single state. Use lower-case state codes in the URL.
