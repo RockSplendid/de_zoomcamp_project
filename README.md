@@ -33,10 +33,30 @@ The data pipeline has multiple steps and it runs in batch mode.
 2. It is cleansed (on the basic level) and transferred to the data lake. *(**Postgres** is used as the data lake.)*
 3. The data is loaded from the data lake to the data warehouse. *(**GCP** is used as the cloud solution and **BigQuery** is the data warehousing tool.)*
 
-**All the above steps are orchestrated as a workflow in [Mage](https://docs.mage.ai/introduction/overview)**.
+**All the above steps are orchestrated as a workflow in [Mage](https://docs.mage.ai/introduction/overview) and Mage, Postgres and pgAdmin are run on Docker**.
 
 4. The transformations and data modeling are done with **dbt** via **dbt cloud**. Again, the data is loaded back into **BigQuery**.
 5. The data is visualized in **Looker Studio**.
 
-## Looker Dashboard
+## Implementation:
+
+After cloning the repo, change the directory to mage folder:
+
+      cd mage
+
+After creating the GCP account [here](https://cloud.google.com/?hl=en) and creating a service account in IAM & Admin section of the website, copy and paste the json file for GCP service account key in the above folder. (GCP account setup is also explained in this [repo](https://github.com/nenalukic/air-quality-project?tab=readme-ov-file#setting-up-gcp))
+
+Using `Dockerfile` and `docker-compose.yml`, a container is built and run with 3 images: Mage, Postgres and pgAdmin:
+
+      docker compose up -d
+
+The volume for pgadmin can also be mounted in the `docker-compose.yml` file, like this: `volumes: - ./data_pgadmin:/var/lib/pgadmin`
+
+After running the container, the Mage service is available on port `6789` and pgadmin on port `8080`. In pgadmin, the server can be created based on the data in the `docker-compose.yml` file and the config which can be created in `.env` file.
+
+The pipelines can be found in `mage/magic-zoomcamp/pipelines` folder and the name of the blocks are mentioned in the `metadata.yaml` file.
+ 
+
+
+## Looker Dashboard:
 [COVID Dashboard](https://lookerstudio.google.com/s/lxHCFARo1Ec)
