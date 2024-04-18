@@ -54,8 +54,28 @@ The volume for pgadmin can also be mounted in the `docker-compose.yml` file, lik
 
 After running the container, the Mage service is available on port `6789` and pgadmin on port `8080`. In pgadmin, the server can be created based on the data in the `docker-compose.yml` file and the config which can be created in `.env` file.
 
-The pipelines can be found in `mage/magic-zoomcamp/pipelines` folder and the name of the blocks are mentioned in the `metadata.yaml` file.
+The pipelines can be found in `mage/magic-zoomcamp/pipelines` folder and the name of the blocks are mentioned in the `metadata.yaml` file. Also, the `.py` files which forms the pipelines in Mage are located in `data_loaders`, `transformers` and `data_exporters` folders.
+
+#### Workflows:
+Firstly, the `covid_api_metadata_to_postgres` pipeline fetches the metadata *(states table in postgres)* from the API and loads them into Postgres.
+
+![1](https://github.com/RockSplendid/de_zoomcamp_project/assets/149693582/f24197d9-25b3-4844-b062-1defdf02ddd1)
+
+Then, the `covid_api_data_to_postgres` pipeline fetches the COVID data *(dailytestresults table in postgres)* from the API and loads them into Postgres. **Note: the data for each state is extracted and concatenated with each other.**
+
+![Screenshot 2024-04-18 213157](https://github.com/RockSplendid/de_zoomcamp_project/assets/149693582/d31fbd92-ba22-4154-ab32-133d0526c240)
+
+Finally, the `load_data_from_postgres_to_bigquery` pipeline transfers the data from Postgres as the data lake into BigQuery as the data warehouse.
  
+![3](https://github.com/RockSplendid/de_zoomcamp_project/assets/149693582/27866b52-3e77-4253-8131-07f83e152cb7)
+
+### Transformations and Data Modeling:
+
+All the steps as depicted below, exist in the `dbt_covid/models` folder.
+
+![Screenshot 2024-04-17 190714](https://github.com/RockSplendid/de_zoomcamp_project/assets/149693582/3949016a-cb86-42fc-8e7d-c5a252f3e5de)
+
+The whole model and the dependent `.sql` files can be built and run with `dbt build` and `dbt run`, respectively.
 
 
 ## Looker Dashboard:
