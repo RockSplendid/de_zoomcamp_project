@@ -79,4 +79,6 @@ The whole model and the dependent `.sql` files can be built and run with `dbt bu
 
 
 ## Looker Dashboard:
+After the transformations made in dbt, *fact_test_result* table is connected to Looker via Google BigQuery connector and the dashboard is designed based on various metrics.
+
 [COVID Dashboard](https://lookerstudio.google.com/s/lxHCFARo1Ec)
