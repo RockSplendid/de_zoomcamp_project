@@ -33,7 +33,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./data_postgres:/var/lib/postgresql/data:z
+      - ./data_postgres:/var/lib/postgresql/data
     ports:
       - "${POSTGRES_PORT}:5432"
   pgadmin:

@@ -175,4 +175,5 @@ scratch*
 *.env
 *.json
 mage_data
-data_*
+data_postgres
+data_pgadmin
